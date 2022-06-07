@@ -1,4 +1,4 @@
-module github.com/safestack-hq/labs-validator
+module github.com/safestack-hq/labval
 
 go 1.17
 

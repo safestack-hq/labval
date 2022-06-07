@@ -6,7 +6,7 @@ import (
 	"log"
 	"os"
 
-	"github.com/safestack-hq/labs-validator/version"
+	"github.com/safestack-hq/labval/version"
 
 	"github.com/mitchellh/cli"
 )
