@@ -75,9 +75,9 @@ func (t *TrivyCommand) Run(args []string) int {
 		return 1
 	}
 
-	authToken := os.Getenv("LABS_AUTH")
+	authToken := os.Getenv(LABS_AUTH)
 	if authToken == "" {
-		fmt.Printf("Error: Missing environment variable LABS_AUTH\n")
+		fmt.Printf("Error: Missing environment variable %s\n", LABS_AUTH)
 		return 1
 	}
 

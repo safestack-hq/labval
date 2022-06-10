@@ -20,6 +20,7 @@ import (
 type ScmJwt struct {
 	Lstate string `json:"Lstate"`
 	Lcb    string `json:"Lcb"`
+	Lname  string `json:"Lname"`
 	jwt.StandardClaims
 }
 
@@ -27,6 +28,7 @@ type ScmJwt struct {
 type ValJwt struct {
 	Lstate string `json:"Lstate"`
 	Lvurl  string `json:"Lvurl"`
+	Lname  string `json:"Lname"`
 	jwt.StandardClaims
 }
 
