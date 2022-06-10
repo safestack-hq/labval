@@ -11,6 +11,8 @@ import (
 	"github.com/mitchellh/cli"
 )
 
+const LABS_AUTH = "LABS_AUTH"
+
 func Run(args []string) int {
 
 	globalCmdOptions := &GlobalCmdOptions{}
@@ -18,6 +20,11 @@ func Run(args []string) int {
 	Commands := map[string]cli.CommandFactory{
 		"trivy": func() (cli.Command, error) {
 			return &TrivyCommand{
+				GlobalCmdOptions: globalCmdOptions,
+			}, nil
+		},
+		"webconfig-easy": func() (cli.Command, error) {
+			return &WebConfigEasy{
 				GlobalCmdOptions: globalCmdOptions,
 			}, nil
 		},
