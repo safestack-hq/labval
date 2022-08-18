@@ -111,7 +111,7 @@ func (w *WebConfigEasy) Run(args []string) int {
 		return 1
 	}
 
-	parsedResults, err := gh.SendData(prettyJson)
+	parsedResults, err := gh.SendData(prettyJson, w.flagCI, w.flagGHActions, w.flagGHRepo)
 	if err != nil {
 		fmt.Printf("%s\n", err)
 		return 1
