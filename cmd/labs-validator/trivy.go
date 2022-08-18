@@ -145,7 +145,7 @@ func (t *TrivyCommand) Run(args []string) int {
 	t.debugLog(fmt.Sprintf("Final json: %s", string(prettyJson)))
 
 	// Send our results back to the labval backend
-	parsedResults, err := gh.SendData(prettyJson)
+	parsedResults, err := gh.SendData(prettyJson, t.flagCI, t.flagGHActions, t.flagGHRepo)
 	if err != nil {
 		fmt.Printf("%s\n", err)
 		return 1

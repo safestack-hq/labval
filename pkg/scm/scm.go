@@ -34,8 +34,9 @@ type ValJwt struct {
 
 // The JSON type to send to the backend
 type ApiJson struct {
-	Auth string `json:"auth"`
-	Data string `json:"data"`
+	Auth     string `json:"auth"`
+	Data     string `json:"data"`
+	Metadata string `json:"metadata"`
 }
 
 // The JSON type used in parsing responses from the backend
@@ -102,7 +103,10 @@ func NewScm(token string, debug bool) (Scm, error) {
 }
 
 // Send data to the Labs Validator
-func (s *Scm) SendData(data []byte) (ApiJsonRes, error) {
+func (s *Scm) SendData(data []byte, ci, ghactions, ghrepo string) (ApiJsonRes, error) {
+	metadata := fmt.Sprintf("CI=%s|GITHUB_ACTIONS=%s|GITHUB_REPOSITORY=%s", ci, ghactions, ghrepo)
+	metadata64 := base64.StdEncoding.EncodeToString([]byte(metadata))
+
 	b64 := base64.StdEncoding.EncodeToString(data)
 	s.debugLog(fmt.Sprintf("Final b64: %s", b64))
 
@@ -113,8 +117,9 @@ func (s *Scm) SendData(data []byte) (ApiJsonRes, error) {
 	parsedResults := ApiJsonRes{}
 
 	jsonBody := ApiJson{
-		Auth: s.authToken,
-		Data: b64,
+		Auth:     s.authToken,
+		Data:     b64,
+		Metadata: metadata64,
 	}
 
 	body, err := json.Marshal(jsonBody)

@@ -48,7 +48,10 @@ func Run(args []string) int {
 }
 
 type GlobalCmdOptions struct {
-	flagDebug bool
+	flagDebug     bool
+	flagCI        string
+	flagGHActions string
+	flagGHRepo    string
 }
 
 func (g *GlobalCmdOptions) GetFlagset(name string) *flag.FlagSet {
@@ -57,6 +60,10 @@ func (g *GlobalCmdOptions) GetFlagset(name string) *flag.FlagSet {
 	if os.Getenv("DEBUG") == "TRUE" {
 		g.flagDebug = true
 	}
+
+	g.flagCI = os.Getenv("CI")
+	g.flagGHActions = os.Getenv("GITHUB_ACTIONS")
+	g.flagGHRepo = os.Getenv("GITHUB_REPOSITORY")
 	return flagSet
 }
 
